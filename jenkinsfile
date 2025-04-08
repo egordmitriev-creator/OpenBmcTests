@@ -8,24 +8,20 @@ pipeline {
     }
     
     stages {
-        stage ('Build container with OpenBmc') {
-            script {
-                sh "docker build -t openbmc-qemu ."
+        stage('Build container with OpenBmc') {
+            steps {
+                script {
+                    sh "docker build -t openbmc-qemu ."
+                }
             }
         }
 
-        stage ('Start container with OpenBmc') {
-            script {
-                sh "docker run -it --rm -p 2222:2222 -p 2443:2443 -p 2623:2623/udp openbmc-qemu:latest"
+        stage('Start container with OpenBmc') {
+            steps {
+                script {
+                    sh "docker run -it --rm -p 2222:2222 -p 2443:2443 -p 2623:2623/udp openbmc-qemu:latest"
+                }
             }
         }
-
-        stage ('Start Autotest') {
-
-        }
-        stage ('Start WebUI Tests') {
-
-        }
-        stage ('Start Load Tests')
     }
 }
