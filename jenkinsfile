@@ -1,10 +1,25 @@
 pipeline {
     agent any
+
+    environment {
+        //IMAGE_NAME = 'hello-world-app'
+        //DOCKER_IMAGE = 'hello-world-app:latest'
+        //PORT = '8080' // Порт для использования контейнером
+    }
     
     stages {
-        stage ('Start qemu with OpenBmc'){
-
+        stage ('Build container with OpenBmc') {
+            script {
+                sh "docker build -t openbmc-qemu ."
+            }
         }
+
+        stage ('Start container with OpenBmc') {
+            script {
+                sh "docker run -it --rm -p 2222:2222 -p 2443:2443 -p 2623:2623/udp openbmc-qemu:latest"
+            }
+        }
+
         stage ('Start Autotest') {
 
         }
