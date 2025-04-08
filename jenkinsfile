@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage ('Start qemu with OpenBmc'){
+
+        }
+        stage ('Start Autotest') {
+
+        }
+        stage ('Start WebUI Tests') {
+
+        }
+        stage ('Start Load Tests')
+    }
+}
