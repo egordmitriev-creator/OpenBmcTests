@@ -1,11 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-        //IMAGE_NAME = 'hello-world-app'
-        //DOCKER_IMAGE = 'hello-world-app:latest'
-        //PORT = '8080' // Порт для использования контейнером
-    }
     
     stages {
         stage('Build container with OpenBmc') {
