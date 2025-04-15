@@ -9,7 +9,10 @@ pipeline {
         stage('Install Qemu') {
             steps {
                 script {
-                    sh "apt-get install qemu-system-arm"
+                    sh """
+                    apt-get update
+                    apt-get install qemu-system-arm
+                    """
                 }
             }
         }
