@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        QEMU_IMAGE = '/romulus/obmc-phosphor-image-romulus-20250214213550.static.mtd'
+        QEMU_IMAGE = '/romulus/obmc-phosphor-image-romulus-20250415053117.static.mtd'
     }
 
     stages {
@@ -28,7 +28,7 @@ pipeline {
         stage('Unzip pomulus') {
             steps {
                 script {
-                    sh "unzip romulus.zip"
+                    sh "unzip -y romulus.zip"
                 }
             }
         }
