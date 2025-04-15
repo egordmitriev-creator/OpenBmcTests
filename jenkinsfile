@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh '''
                     . ${VENV}/bin/activate
-                    pytest test_redfish.py > redfish_report.log || true
+                    pytest -v test_redfish.py > redfish_report.log || true
                 '''
                 archiveArtifacts artifacts: 'redfish_report.log', onlyIfSuccessful: false
             }
@@ -54,7 +54,7 @@ pipeline {
 
                     . ${VENV}/bin/activate
                     sleep 5
-                    pytest test_webui.py > webui_report.log || true
+                    pytest -v test_webui.py > webui_report.log || true
                 '''
                 archiveArtifacts artifacts: 'webui_report.log', onlyIfSuccessful: false
             }
