@@ -14,46 +14,46 @@ pipeline {
     stages {
         stage('Start QEMU with OpenBMC') {
             steps {
-                sh '''
+                sh """
                     apt-get update && apt-get install -y qemu-system-arm curl
                     nohup qemu-system-arm -m 256 -M romulus-bmc -nographic \
-                        -drive file=$QEMU_IMAGE,format=raw,if=mtd \
+                        -drive file=${QEMU_IMAGE},format=raw,if=mtd \
                         -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623 \
                         > $QEMU_LOG 2>&1 &
                     sleep 30
-                '''
+                """
             }
         }
 
         stage('Run Redfish API Tests') {
             steps {
-                sh '''
+                sh """
                     pip install -r requirements.txt pytest
                     pytest test_redfish.py > redfish_report.log || true
-                '''
+                """
                 archiveArtifacts artifacts: 'redfish_report.log', onlyIfSuccessful: false
             }
         }
 
         stage('Run WebUI Tests') {
             steps {
-                sh '''
+                sh """
                     apt-get install -y wget unzip chromium-driver chromium chromium-l10n chromium-common chromium-data chromium-sandbox xvfb
                     pip install selenium pytest
                     Xvfb :99 &
                     export DISPLAY=:99
                     pytest test_webui.py > webui_report.log || true
-                '''
+                """
                 archiveArtifacts artifacts: 'webui_report.log', onlyIfSuccessful: false
             }
         }
 
         stage('Run Load Tests') {
             steps {
-                sh '''
+                sh """
                     pip install locust
                     locust -f test_load.py --headless --host https://localhost:2443 --users 5 --spawn-rate 1 -t1m --run-time 1m > load_report.log || true
-                '''
+                """
                 archiveArtifacts artifacts: 'load_report.log', onlyIfSuccessful: false
             }
         }
