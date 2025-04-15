@@ -6,33 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Install package') {
-            steps {
-                script {
-                    sh """
-                    apt-get update
-                    apt-get install -y qemu-system-arm wget
-                    """
-                }
-            }
-        }
-
-        stage('Install romulus') {
-            steps {
-                script {
-                    sh "wget https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip"
-                }
-            }
-        }
-
-        stage('Unzip pomulus') {
-            steps {
-                script {
-                    sh "unzip -o romulus.zip"
-                }
-            }
-        }
-    
         stage('Start qemu with OpenBmc') {
             steps {
                 script {
