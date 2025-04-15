@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11-slim'
-            args '-u root --network host -v /dev/shm:/dev/shm'
-        }
-    }
+    agent any
 
     environment {
         QEMU_IMAGE = '/romulus/obmc-phosphor-image-romulus-20250415053117.static.mtd'
