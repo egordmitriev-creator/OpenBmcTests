@@ -6,12 +6,12 @@ pipeline {
     }
 
     stages {
-        stage('Install Qemu') {
+        stage('Install package') {
             steps {
                 script {
                     sh """
                     apt-get update
-                    apt-get install -y qemu-system-arm
+                    apt-get install -y qemu-system-arm wget
                     """
                 }
             }
