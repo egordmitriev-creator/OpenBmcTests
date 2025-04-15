@@ -28,7 +28,7 @@ pipeline {
         stage('Unzip pomulus') {
             steps {
                 script {
-                    sh "unzip -y romulus.zip"
+                    sh "unzip -o romulus.zip"
                 }
             }
         }
