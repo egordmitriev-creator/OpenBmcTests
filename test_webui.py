@@ -13,7 +13,7 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--ignore-certificate-errors")
-    options.add_argument("--headless") # Для CI
+    #options.add_argument("--headless") # Для CI
 
     service = Service(executable_path="/usr/bin/chromedriver")
 
