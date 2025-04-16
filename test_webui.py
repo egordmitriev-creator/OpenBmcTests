@@ -13,7 +13,7 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--ignore-certificate-errors")
-    #options.add_argument("--headless") # Для CI
+    options.add_argument("--headless") # Для CI
 
     service = Service(executable_path="/usr/bin/chromedriver")
 
@@ -64,9 +64,9 @@ def test_fail_login(driver):
     login_button.click()
     time.sleep(3)
 
-    errorWindow = driver.find_element(By.CLASS_NAME, 'neterror')
+    startWindow = driver.find_element(By.CLASS_NAME, 'login-container')
 
-    assert errorWindow.is_displayed()
+    assert startWindow.is_displayed()
 
 def test_block_user(driver):
     # Функция для попытки входа
@@ -96,6 +96,6 @@ def test_block_user(driver):
     attempt_login('user', 'somepass1')  # Правильный пароль
     time.sleep(3)
 
-    errorWindow = driver.find_element(By.CLASS_NAME, 'neterror')
+    startWindow = driver.find_element(By.CLASS_NAME, 'login-container')
     
-    assert errorWindow.is_displayed()
+    assert startWindow.is_displayed()
