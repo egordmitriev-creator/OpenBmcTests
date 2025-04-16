@@ -15,7 +15,7 @@ def driver():
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("--headless") # Для CI
 
-    service = Service(executable_path="/chromedriver-linux64/chromedriver")
+    service = Service(executable_path="/usr/bin/chromedriver")
 
     # Инициализация драйвера
     driver = webdriver.Chrome(service=service, options=options)
