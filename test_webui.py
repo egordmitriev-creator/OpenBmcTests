@@ -3,6 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 # Фикстура для инициализации и завершения работы драйвера
 @pytest.fixture(scope="module")
@@ -12,9 +13,12 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--ignore-certificate-errors")
+    options.add_argument("--headless") # Для CI
+
+    service = Service(executable_path="/chromedriver-linux64/chromedriver")
 
     # Инициализация драйвера
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(service=service, options=options)
     yield driver  # Возвращаем драйвер тесту
 
     # Завершение работы драйвера после выполнения теста
