@@ -65,7 +65,7 @@ pipeline {
                 sh '''
                     . ${VENV}/bin/activate
                     locust -f test_load.py --headless --host https://localhost:2443 \
-                        --users 5 --spawn-rate 1 -t1m > load_report.log || true
+                        --users 5 --spawn-rate 1 -t1m > load_report.log 2>&1 || true
                 '''
                 archiveArtifacts artifacts: 'load_report.log', onlyIfSuccessful: false
             }
