@@ -64,10 +64,6 @@ def test_fail_login(driver):
     login_button.click()
     time.sleep(3)
 
-    # startWindow = driver.find_element(By.CLASS_NAME, 'login-container')
-
-    # assert startWindow.is_displayed()
-
     errorWindow = driver.find_element(By.CLASS_NAME, 'neterror')
 
     assert errorWindow.is_displayed()
@@ -100,9 +96,6 @@ def test_block_user(driver):
     attempt_login('user', 'somepass1')  # Правильный пароль
     time.sleep(3)
 
-    # startWindow = driver.find_element(By.CLASS_NAME, 'login-container')
-    
-    # assert startWindow.is_displayed()
     errorWindow = driver.find_element(By.CLASS_NAME, 'neterror')
 
     assert errorWindow.is_displayed()
