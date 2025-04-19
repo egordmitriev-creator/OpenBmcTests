@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                     apt-get update
-                    apt-get install -y python3-venv python3-pip qemu-system-arm curl xvfb chromium-driver chromium
+                    apt-get install -y wget python3-venv python3-pip qemu-system-arm curl xvfb chromium-driver chromium
 
                     # Создание и активация виртуального окружения
                     python3 -m venv ${VENV}
